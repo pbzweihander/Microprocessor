@@ -3,8 +3,8 @@
 module ALU(
 		input [7:0] operand1,
 		input [7:0] operand2,
-		output reg [7:0] result
+		output [7:0] result
     );
 
-	result <= operand1 + operand2;
+	assign result = operand1 + operand2;
 endmodule

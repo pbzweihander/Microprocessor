@@ -26,18 +26,41 @@ module DataMemoryTest;
 		read = 0;
 		write = 0;
 		data_inputs = 0;
-	end
-	
-	always begin
-		if (address == 8'b00011111) begin
-			address <= 0;
-		end else begin
-			address <= address + 1;
-		end
-		read <= 1;
-		clk <= 1;
-		#10;
-		clk <= 0;
-		#10;
+		
+		#100;
+		
+		address = 8'b00000010;
+		data_inputs = 8'b01010101;
+		read = 0;
+		write = 1;
+		clk = 1;
+		#50;
+		clk = 0;
+		#50;
+		
+		address = 8'b00001010;
+		data_inputs = 8'b11001100;
+		read = 0;
+		write = 1;
+		clk = 1;
+		#50;
+		clk = 0;
+		#50;
+		
+		address = 8'b00000010;
+		read = 1;
+		write = 0;
+		clk = 1;
+		#50;
+		clk = 0;
+		#50;
+		
+		address = 8'b00001010;
+		read = 1;
+		write = 0;
+		clk = 1;
+		#50;
+		clk = 0;
+		#50;
 	end
 endmodule

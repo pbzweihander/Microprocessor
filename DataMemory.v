@@ -20,6 +20,7 @@ module DataMemory(
 		for (i = 0; i < 16; i = i + 1) begin
 			registers[i + 16] <= -i;
 		end
+		data_outputs <= 0;
 	end
 
 	always @(posedge reset) begin
@@ -29,12 +30,13 @@ module DataMemory(
 		for (i = 0; i < 16; i = i + 1) begin
 			registers[i + 16] <= -i;
 		end
+		data_outputs <= 0;
 	end
-	
-	always @(posedge clk && read) begin
-		data_outputs <= registers[address[4:0]];
-	end
-	always @(negedge clk && write) begin
-		registers[address[4:0]] <= data_inputs;
+
+	always @(posedge clk) begin
+		if (read)
+			data_outputs <= registers[address[4:0]];
+		if (write)
+			registers[address[4:0]] <= data_inputs;
 	end
 endmodule

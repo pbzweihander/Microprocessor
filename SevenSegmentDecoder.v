@@ -3,8 +3,8 @@
 module SevenSegmentDecoder(
 		input [3:0] bcd,
 		output reg [6:0] seg
-    );
-	
+	);
+
 	always @(bcd) begin
 		case (bcd)
 			4'd0: seg <= 7'b0111111;
