@@ -2,27 +2,23 @@
 
 module SevenSegmentDecoder(
 		input [3:0] bcd,
-		output reg [6:0] seg
+		output [6:0] seg
 	);
 
-	always @(bcd) begin
-		case (bcd)
-			4'd0: seg <= 7'b0111111;
-			4'd1: seg <= 7'b0000110;
-			4'd2: seg <= 7'b1011011;
-			4'd3: seg <= 7'b1001111;
-			4'd4: seg <= 7'b1100110;
-			4'd5: seg <= 7'b1101101;
-			4'd6: seg <= 7'b1111101;
-			4'd7: seg <= 7'b0000111;
-			4'd8: seg <= 7'b1111111;
-			4'd9: seg <= 7'b1101111;
-			4'd10: seg <= 7'b1110111;
-			4'd11: seg <= 7'b1111100;
-			4'd12: seg <= 7'b0111001;
-			4'd13: seg <= 7'b1011110;
-			4'd14: seg <= 7'b1111001;
-			4'd15: seg <= 7'b1110001;
-		endcase
-	end
+	assign seg = bcd == 4'd0 ? 7'b0111111 :
+		bcd == 4'd1 ? 7'b0000110 :
+		bcd == 4'd2 ? 7'b1011011 :
+		bcd == 4'd3 ? 7'b1001111 :
+		bcd == 4'd4 ? 7'b1100110 :
+		bcd == 4'd5 ? 7'b1101101 :
+		bcd == 4'd6 ? 7'b1111101 :
+		bcd == 4'd7 ? 7'b0000111 :
+		bcd == 4'd8 ? 7'b1111111 :
+		bcd == 4'd9 ? 7'b1101111 :
+		bcd == 4'd10 ? 7'b1110111 :
+		bcd == 4'd11 ? 7'b1111100 :
+		bcd == 4'd12 ? 7'b0111001 :
+		bcd == 4'd13 ? 7'b1011110 :
+		bcd == 4'd14 ? 7'b1111001 :
+		7'b1110001;
 endmodule
