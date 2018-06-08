@@ -23,11 +23,12 @@ module Registers(
 			registers[i] <= 0;
 	end
 
-	always @(posedge reset or clk) begin
+	always @(posedge reset or negedge clk) begin
 		if (reset) begin
 			for (i = 0; i < 4; i = i + 1)
 				registers[i] <= 0;
-		end else if (write && !clk)
-			registers[write_reg] <= write_data;
+		end else if (!clk)
+			if (write)
+				registers[write_reg] <= write_data;
 	end
 endmodule
