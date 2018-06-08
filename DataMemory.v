@@ -21,7 +21,6 @@ module DataMemory(
 		for (i = 0; i < 16; i = i + 1) begin
 			registers[i + 16] <= -i;
 		end
-		data_outputs <= 0;
 	end
 
 	always @(posedge reset or clk) begin
@@ -32,7 +31,6 @@ module DataMemory(
 			for (i = 0; i < 16; i = i + 1) begin
 				registers[i + 16] <= -i;
 			end
-			data_outputs <= 0;
 		end else if (write && !clk)
 			registers[address[4:0]] <= data_inputs;
 	end

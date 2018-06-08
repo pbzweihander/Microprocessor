@@ -5,8 +5,8 @@ module Microprocessor(
 		input reset,
 		input [7:0] instruction,
 		output reg [7:0] pc,
-		output [6:0] write_data_display_low,
-		output [6:0] write_data_display_high
+		output [6:0] display_low,
+		output [6:0] display_high
 	);
 
 	wire [1:0] op = instruction[7:6];
@@ -87,11 +87,11 @@ module Microprocessor(
 
 	SevenSegmentDecoder ssdecoder1(
 			.bcd(reg_write_data[3:0]),
-			.seg(write_data_display_low)
+			.seg(display_low)
 		);
 	SevenSegmentDecoder ssdecoder2(
 			.bcd(reg_write_data[7:4]),
-			.seg(write_data_display_high)
+			.seg(display_high)
 		);
 
 	ALU alu(
