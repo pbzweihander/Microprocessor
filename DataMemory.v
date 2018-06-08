@@ -4,14 +4,15 @@ module DataMemory(
 		input clk,
 		input reset,
 		input [7:0] address,
-		input read,
 		input write,
 		input [7:0] data_inputs,
-		output reg [7:0] data_outputs
+		output [7:0] data_outputs
 	);
 
 	reg [7:0] registers[31:0];
 	integer i;
+
+	assign data_outputs = registers[address[4:0]];
 
 	initial begin
 		for (i = 0; i < 16; i = i + 1) begin
@@ -32,11 +33,7 @@ module DataMemory(
 				registers[i + 16] <= -i;
 			end
 			data_outputs <= 0;
-		end else begin
-			if (read && clk)
-				data_outputs <= registers[address[4:0]];
-			if (write && !clk)
-				registers[address[4:0]] <= data_inputs;
-		end
+		end else if (write && !clk)
+			registers[address[4:0]] <= data_inputs;
 	end
 endmodule

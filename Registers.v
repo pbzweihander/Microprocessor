@@ -8,14 +8,26 @@ module Registers(
 		input write,
 		input [1:0] write_reg,
 		input [7:0] write_data,
-		output reg [7:0] read_data1,
-		output reg [7:0] read_data2
+		output [7:0] read_data1,
+		output [7:0] read_data2
 	);
 
 	reg [7:0] reg0;
 	reg [7:0] reg1;
 	reg [7:0] reg2;
 	reg [7:0] reg3;
+
+	assign read_data1 =
+		read_reg1 == 2'b00 ? reg0 :
+		read_reg1 == 2'b01 ? reg1 :
+		read_reg1 == 2'b10 ? reg2 :
+		reg3;
+
+	assign read_data1 =
+		read_reg2 == 2'b00 ? reg0 :
+		read_reg2 == 2'b01 ? reg1 :
+		read_reg2 == 2'b10 ? reg2 :
+		reg3;
 
 	initial begin
 		reg0 <= 0;

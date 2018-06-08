@@ -104,7 +104,6 @@ module Microprocessor(
 			.clk(clk),
 			.reset(reset),
 			.address(alu_result),
-			.read(mem_read),
 			.write(mem_write),
 			.data_inputs(reg_data2),
 			.data_outputs(memory_output)
