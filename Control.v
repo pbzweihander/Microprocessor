@@ -10,7 +10,7 @@ module Control(
 		output mem_write,
 		output mem_to_reg,
 		output alu_op
-    );
+	);
 
 	wire [7:0] out;
 	assign {reg_dst, reg_write, alu_src, branch, mem_read, mem_write, mem_to_reg, alu_op} = out;

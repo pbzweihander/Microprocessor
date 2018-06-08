@@ -8,7 +8,7 @@ module DataMemory(
 		input write,
 		input [7:0] data_inputs,
 		output reg [7:0] data_outputs
-    );
+	);
 
 	reg [7:0] registers[31:0];
 	integer i;
