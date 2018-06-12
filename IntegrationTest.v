@@ -11,7 +11,8 @@ module IntegrationTest;
 	wire [6:0] display_rs;
 	wire [6:0] display_rt;
 	wire [6:0] display_rd;
-	wire [5:0] display_pc;
+	wire [4:0] display_pc;
+	wire display_clock;
 
 	wire [7:0] MemByte[20:0];
 
@@ -53,7 +54,8 @@ module IntegrationTest;
 		.display_rs(display_rs),
 		.display_rt(display_rt),
 		.display_rd(display_rd),
-		.display_pc(display_pc)
+		.display_pc(display_pc),
+		.display_clock(display_clock)
 	);
 
 	initial begin

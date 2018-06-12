@@ -11,7 +11,8 @@ module Microprocessor(
 		output [6:0] display_rs,
 		output [6:0] display_rt,
 		output [6:0] display_rd,
-		output [5:0] display_pc
+		output [4:0] display_pc,
+		output display_clock
 	);
 
 	wire [1:0] op = instruction[7:6];
@@ -60,8 +61,10 @@ module Microprocessor(
 		? alu_result
 		: memory_output;
 
+	reg [7:0] display_write_data;
 	assign display_pc = pc;
-
+	assign display_clock = clk;
+	
 	ClockDivider divider(
 			.clk_in(origclk),
 			.reset(reset),
@@ -93,11 +96,11 @@ module Microprocessor(
 		);
 
 	HexDecoder ssdecoder_high(
-			.bcd(reg_write_data[3:0]),
+			.bcd(display_write_data[3:0]),
 			.seg(display_low)
 		);
 	HexDecoder ssdecoder_low(
-			.bcd(reg_write_data[7:4]),
+			.bcd(display_write_data[7:4]),
 			.seg(display_high)
 		);
 	OpDecoder ssdecoder_op(
@@ -134,6 +137,7 @@ module Microprocessor(
 
 	initial begin
 		pc = 0;
+		display_write_data = 0;
 	end
 
 	always @(posedge reset or negedge clk) begin
@@ -144,5 +148,12 @@ module Microprocessor(
 				branch == 0
 				? pc + 1
 				: pc + 1 + imm;
+	end
+	
+	always @(posedge reset or posedge clk) begin
+		if (reset)
+			display_write_data <= 0;
+		else
+			display_write_data <= reg_write_data;
 	end
 endmodule

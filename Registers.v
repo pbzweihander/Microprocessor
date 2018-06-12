@@ -14,7 +14,7 @@ module Registers(
 
 	reg [7:0] registers[3:0];
 	integer i;
-
+	
 	assign read_data1 = registers[read_reg1];
 	assign read_data2 = registers[read_reg2];
 
@@ -23,12 +23,13 @@ module Registers(
 			registers[i] <= 0;
 	end
 
-	always @(posedge reset or negedge clk) begin
+	always @(posedge reset or posedge clk) begin
 		if (reset) begin
 			for (i = 0; i < 4; i = i + 1)
 				registers[i] <= 0;
-		end else if (!clk)
+		end else begin
 			if (write)
 				registers[write_reg] <= write_data;
+		end
 	end
 endmodule
