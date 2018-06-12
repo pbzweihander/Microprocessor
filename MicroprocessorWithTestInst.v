@@ -8,7 +8,12 @@ module MicroprocessorWithTestInst(
 		output [7:0] test_instruction,
 		input [7:0] test_pc,
 		output [6:0] display_low,
-		output [6:0] display_high
+		output [6:0] display_high,
+		output [6:0] display_op,
+		output [6:0] display_rs,
+		output [6:0] display_rt,
+		output [6:0] display_rd,
+		output [5:0] display_pc
 	);
 
 	Microprocessor processer(
@@ -17,7 +22,12 @@ module MicroprocessorWithTestInst(
 			.instruction(instruction),
 			.pc(pc),
 			.display_low(display_low),
-			.display_high(display_high)
+			.display_high(display_high),
+			.display_pc(display_pc),
+			.display_op(display_op),
+			.display_rs(display_rs),
+			.display_rt(display_rt),
+			.display_rd(display_rd)
 		);
 
 	wire [7:0] MemByte[20:0];

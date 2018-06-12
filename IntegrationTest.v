@@ -7,6 +7,11 @@ module IntegrationTest;
 	wire [7:0] pc;
 	wire [6:0] display_low;
 	wire [6:0] display_high;
+	wire [6:0] display_op;
+	wire [6:0] display_rs;
+	wire [6:0] display_rt;
+	wire [6:0] display_rd;
+	wire [5:0] display_pc;
 
 	wire [7:0] MemByte[20:0];
 
@@ -43,7 +48,12 @@ module IntegrationTest;
 		.instruction(instruction),
 		.pc(pc),
 		.display_low(display_low),
-		.display_high(display_high)
+		.display_high(display_high),
+		.display_op(display_op),
+		.display_rs(display_rs),
+		.display_rt(display_rt),
+		.display_rd(display_rd),
+		.display_pc(display_pc)
 	);
 
 	initial begin

@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module SevenSegmentDecoder(
+module HexDecoder(
 		input [3:0] bcd,
 		output [6:0] seg
 	);

@@ -6,7 +6,12 @@ module Microprocessor(
 		input [7:0] instruction,
 		output reg [7:0] pc,
 		output [6:0] display_low,
-		output [6:0] display_high
+		output [6:0] display_high,
+		output [6:0] display_op,
+		output [6:0] display_rs,
+		output [6:0] display_rt,
+		output [6:0] display_rd,
+		output [5:0] display_pc
 	);
 
 	wire [1:0] op = instruction[7:6];
@@ -55,6 +60,8 @@ module Microprocessor(
 		? alu_result
 		: memory_output;
 
+	assign display_pc = pc;
+
 	ClockDivider divider(
 			.clk_in(origclk),
 			.reset(reset),
@@ -85,13 +92,29 @@ module Microprocessor(
 			.read_data2(reg_data2)
 		);
 
-	SevenSegmentDecoder ssdecoder1(
+	HexDecoder ssdecoder_high(
 			.bcd(reg_write_data[3:0]),
 			.seg(display_low)
 		);
-	SevenSegmentDecoder ssdecoder2(
+	HexDecoder ssdecoder_low(
 			.bcd(reg_write_data[7:4]),
 			.seg(display_high)
+		);
+	OpDecoder ssdecoder_op(
+			.op(op),
+			.seg(display_op)
+		);
+	HexDecoder ssdecoder_rs(
+			.bcd(rs),
+			.seg(display_rs)
+		);
+	HexDecoder ssdecoder_rt(
+			.bcd(rt),
+			.seg(display_rt)
+		);
+	HexDecoder ssdecoder_rd(
+			.bcd(rd),
+			.seg(display_rd)
 		);
 
 	ALU alu(
